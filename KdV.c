@@ -3,7 +3,7 @@
 #include <assert.h>
 
 #define N 1000
-#define STEPS 100000
+#define STEPS 10000
 
 void pdu_pdt( double u[N], double s[N], double dx );
 int runge_kutta( double dt, double u[N], double dx, double u_n[N]);
