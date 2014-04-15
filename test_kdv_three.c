@@ -20,13 +20,13 @@ int main()
     int valid;
     FILE* output;
 
-    printf( "Test KdV Three Peak\n" );
+    printf( "Test KdV Three Peaks\n" );
     beg = WTime();
     vector_initialize( &u, N,
         (double[MAX_SIZE]) {0,0}, MAX_SIZE );
     vector_initialize( &u_n, N,
         (double[MAX_SIZE]) {0,0}, MAX_SIZE );
-    simple_sec( &u, dx, 3 );
+    simple_sec( &u, dx, 3, 4);
     output = fopen( "simple_three.txt", "w" );
     fclose( output );
     end = WTime();

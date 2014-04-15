@@ -3,15 +3,6 @@
 #include "kdv_equation.h"
 #include "solver.h"
 
-void initial( Vector *u0, double dx )
-{
-    int i;
-
-    for( i = 0; i < u0 -> N; i++ )
-    {
-        VEC(u0, i) = 2 / pow(cosh(dx*i-4), 2);
-    }
-}
 
 int main()
 {
@@ -35,7 +26,7 @@ int main()
         (double[MAX_SIZE]) {0,0}, MAX_SIZE );
     vector_initialize( &u_n, N,
         (double[MAX_SIZE]) {0,0}, MAX_SIZE );
-    initial( &u, dx );
+    simple_sec( &u, dx, 1, 4 );
     output = fopen( "simple.txt", "w" );
     fclose( output );
     end = WTime();
@@ -62,6 +53,7 @@ int main()
         {
             printf("ERROR!\n");
             printf( "%f\n", k*dt);
+            assert( valid != -1 );
             break;
         }
     }

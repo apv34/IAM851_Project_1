@@ -17,3 +17,9 @@ stamp-h1
 libkdv.a
 test_kdv_simple
 *.txt
+test_kdv_two
+test_kdv_three
+test_kdv_comp
+test_kdv_comp_two
+test_kdv_comp_three
+test_kdv_scaling

@@ -2,8 +2,18 @@
 #include <math.h>
 #include <assert.h>
 
-#define N 1000
+#define N 100
 #define STEPS 10000
+
+#include <sys/time.h>
+#include <stdlib.h>
+static inline double
+WTime(void)
+{
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  return tv.tv_sec + tv.tv_usec / 1e6;
+}
 
 void pdu_pdt( double u[N], double s[N], double dx );
 int runge_kutta( double dt, double u[N], double dx, double u_n[N]);
@@ -29,6 +39,7 @@ int main()
     int j;
     int k = 0;
     int valid = 0;
+    double beg, end;
     
     FILE *file;
     file = fopen( "output.txt", "w" );
@@ -39,6 +50,7 @@ int main()
     //for(i = 0; i < N; i++)
     //    printf("%f ", holda[i]);
     //printf("\n");
+    beg = WTime();
     while(i < STEPS)
     {
         //printf("Time: %f\n", k*dt);
@@ -50,8 +62,8 @@ int main()
         
         if( k % 10 == 0 )
         {
-			if( i % 10 == 0 )
-				printf("Record at %f\n", k*dt);
+			//if( i % 10 == 0 )
+				//printf("Record at %f\n", k*dt);
             for(j = 0; j < N; j++ )
             {
                 //printf("%f", test[i][j] );
@@ -66,9 +78,10 @@ int main()
         if( valid == -1 )
             break;
     }
-    
+    end = WTime();
+    printf( "%fs\n", end - beg);
     fclose(file);
-    printf("i %d k %d\n", i, k);
+    //printf("i %d k %d\n", i, k);
     return 0;
 }
 
@@ -78,7 +91,7 @@ void pdu_pdt( double u[N], double s[N], double dx )
     int i;
     //double dx_2 = pow(dx,2);
     double dx_3 = pow(dx,3);
-    
+    #pragma omp parallel for
     for( i = 0; i < N; i++ )
     { 
         s[i] = -6*u[i]*du_x(u,i,dx) - du_xxx(u,i,dx_3);
@@ -87,7 +100,7 @@ void pdu_pdt( double u[N], double s[N], double dx )
         {
             s[i] = (-0.5 * u[i+2] + (3*u[i]*dx_2 + 1 )*u[i+1] - (3*u[i]*dx_2 + 1 )*u[i-1] 
                 + 0.5 * u[i-2])/dx_3;
-        }/*
+        }
         else if( i <= 1 )
             s[i] = -1;
         else

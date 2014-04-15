@@ -1,4 +1,37 @@
-
+/***************************************************************/
+/*                       Anthony Edmonds                       */
+/*              IAM 851 Project One - KdV Equation             */
+/*                         Spring 2014                         */
+/*                                                             */
+/*            Change Log:                                      */
+/*                   4/10/2014 - Initial. Reusing code from    */
+/*                                  assignment 3               */
+/*                   4/12/2014 - Removed Vector Type from      */
+/*                                  Vector struct              */
+/*                             - Renamed linear_algebra.h to   */
+/*                                  vector_fun.h               */
+/*                             - Removed Matrix type           */
+/*                             - Modified Vector Add to        */
+/*                                  include scalar multipliers */
+/*                                  before the addition        */
+/*                             - Removed functions unneeded by */
+/*                                  KdV problem                */
+/*                             - Expanded Max Size to 100000   */
+/*                             - Added VEC(v,i) to access      */
+/*                                  array elements             */
+/*                                  SOURCE: linear_algebra.h   */
+/*                                  from IAM851 Spring 2014    */
+/*                                  by Kai Germaschewski       */
+/*                             - Added vector_copy function    */
+/*                   4/12/2014 - Renamed vec_add to vector_add */
+/*                                  for consistency            */
+/*                             - Added more comments, in       */
+/*                                  effort to properly         */
+/*                                  Document the project       */
+/*                                                             */
+/*                      Vector Operations                      */
+/*                         vector_fun.h                        */
+/***************************************************************/
 #ifndef VECTOR_FUN_H
 #define VECTOR_FUN_H
 
@@ -16,22 +49,26 @@ typedef struct
 } Vector;
 
 /***************************************************************/
-/*            vec_add - Takes two vectors and adds the two     */
+/*            vector_add - Takes two vectors and adds the two  */
 /*                     vectors and stores it in a third vector */
+/*                     z = a*x+b*y                             */
 /*                                                             */
 /*            Input: x -- a pointer to a Vector struct that    */
 /*                     stores N values in an array of doubles, */
-/*                     the value N, and the vector type of the */
-/*                     first vector                            */
+/*                     and the length N of the vector          */
+/*                   a -- a double that corresponds to the     */
+/*                     scalar multiple that x is to be         */
+/*                     multiplied by                           */
 /*                   y -- a pointer to a Vector struct that    */
 /*                     stores N values in an array of doubles, */
-/*                     the value N, and the vector type of the */
-/*                     second vector                           */
+/*                     and the length N of the vector          */
+/*                   b -- a double that corresponds to the     */
+/*                     scalar multiple that y is to be         */
+/*                     multiplied by                           */
 /*                   z -- a pointer to a Vector struct that    */
 /*                     stores N values in an array of doubles, */
-/*                     the value N, and the vector type of the */
-/*                     vector that will store the result of    */
-/*                     x+y                                     */
+/*                     and the length N of the vector that     */
+/*                     will store the result of a*x+b*y        */
 /*                                                             */
 /*            Output: NONE                                     */
 /*                                                             */
@@ -41,9 +78,10 @@ typedef struct
 /*                     and then the result of the operation    */
 /*                     is stored in z.                         */
 /*                                                             */
-/*                  Defined in vector.c                       */
+/*                    Defined in vector_fun.c                  */
 /***************************************************************/
-void vec_add( Vector* x, double a, Vector* y, double b, Vector* z);
+void vector_add( Vector* x, double a, Vector* y, double b, 
+    Vector* z);
 
 /***************************************************************/
 /*            vector_write - Writes a vector to the file       */
@@ -51,8 +89,7 @@ void vec_add( Vector* x, double a, Vector* y, double b, Vector* z);
 /*                                                             */
 /*            Input: x -- a pointer to a Vector struct that    */
 /*                     stores N values in an array of doubles, */
-/*                     the value N,and the vector type of the  */
-/*                     vector to be printed                    */
+/*                     and the length N of the vector          */
 /*                   file_name -- a string that contains the   */
 /*                     name of the file to be written to       */
 /*                                                             */
@@ -62,10 +99,38 @@ void vec_add( Vector* x, double a, Vector* y, double b, Vector* z);
 /*            Side Effects: Writes the vector in its proper    */
 /*                     form to the specified File              */
 /*                                                             */
-/*               Defined in vector.c                     */
+/*                    Defined in vector_fun.c                  */
 /***************************************************************/
 void vector_write(Vector *x, char* file_name);
 
+/***************************************************************/
+/*            vector_copy - Copies vector y into vector b      */
+/*                                                             */
+/*            Input: x -- a pointer to a Vector struct that    */
+/*                     stores N values in an array of doubles, */
+/*                     and the length N of the vector          */
+/*                   y -- a pointer to a Vector struct that    */
+/*                     stores N values in an array of doubles, */
+/*                     and the length N of the vector          */
+/*                   b -- a double that corresponds to the     */
+/*                     scalar multiple that y is to be         */
+/*                     multiplied by                           */
+/*                   z -- a pointer to a Vector struct that    */
+/*                     stores N values in an array of doubles, */
+/*                     the value N, and the vector type of the */
+/*                     vector that will store the result of    */
+/*                     a*x+b*y                                 */
+/*                                                             */
+/*            Output: NONE                                     */
+/*                                                             */
+/*            Side Effects: If there is a dimension mismatch   */
+/*                     there will be an assertion failure.     */
+/*                     The contents of z are reset to zero,    */
+/*                     and then the result of the operation    */
+/*                     is stored in z.                         */
+/*                                                             */
+/*                    Defined in vector_fun.c                  */
+/***************************************************************/
 void vector_copy( Vector *x, Vector *y );
 
 /***************************************************************/
@@ -93,7 +158,7 @@ void vector_copy( Vector *x, Vector *y );
 /*                     specified type and length, using the    */
 /*                     values in values[]                      */
 /*                                                             */
-/*              Defined in linear_algebra.c                    */
+/*                    Defined in vector_fun.c                  */
 /***************************************************************/
 void vector_initialize( Vector *new, int length, 
         double values[], int sizeVals );

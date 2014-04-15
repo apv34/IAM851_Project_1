@@ -1,11 +1,15 @@
 /***************************************************************/
 /*                       Anthony Edmonds                       */
-/*                IAM 851 As */
+/*              IAM 851 Project One - KdV Equation             */
+/*                         Spring 2014                         */
+/*                                                             */
+/*                     Vector Operations                       */
+/*                       vector_fun.c                          */
 /***************************************************************/
 #include "vector_fun.h"
 
 /***************************************************************/
-/*            vec_add - Takes two vectors and adds the two     */
+/*            vector_add - Takes two vectors and adds the two   */
 /*                     vectors and stores it in a third vector */
 /*                                                             */
 /*            Input: x -- a pointer to a Vector struct that    */
@@ -30,9 +34,9 @@
 /*                     and then the result of the operation    */
 /*                     is stored in z.                         */
 /*                                                             */
-/*                 Declared in vector.h                */
+/*                   Declared in vector_fun.h                  */
 /***************************************************************/
-void vec_add( Vector* x, double a, Vector* y, double b, Vector* z)
+void vector_add( Vector* x, double a, Vector* y, double b, Vector* z)
 {
     // Check Vector Lengths
     if( x -> N != y -> N )
@@ -42,8 +46,8 @@ void vec_add( Vector* x, double a, Vector* y, double b, Vector* z)
     }
     
     // Reset the contents of z
-    vector_initialize( z, x -> N,
-        (double[MAX_SIZE]) {0,0}, MAX_SIZE );
+    //vector_initialize( z, x -> N,
+        //(double[MAX_SIZE]) {0,0}, MAX_SIZE );
     
     for( int i = 0; i < x -> N; i++ ){
         VEC(z,i) = a * VEC(x,i) + b * VEC(y,i);
@@ -70,7 +74,7 @@ void vec_add( Vector* x, double a, Vector* y, double b, Vector* z)
 /*            Side Effects: Writes the vector in its proper    */
 /*                     form to the specified File              */
 /*                                                             */
-/*                 Declared in vector.h                */
+/*                   Declared in vector_fun.h                  */
 /***************************************************************/
 
 void vector_write(Vector *x, char* file_name)
@@ -89,14 +93,9 @@ void vector_write(Vector *x, char* file_name)
 
 void vector_copy( Vector *x, Vector *y )
 {
-    if( x -> N != y -> N )
-    {
-        printf( "Error at Vector Copy: Vector size mismatch\n" );
-        assert( x -> N == y -> N );
-    }
-    // Reset the contents of z
-    vector_initialize( x, x -> N,
-        (double[MAX_SIZE]) {0,0}, MAX_SIZE );
+    // Reset the contents of x
+    //vector_initialize( x, y -> N,
+        //(double[MAX_SIZE]) {0,0}, MAX_SIZE );
         
     for( int i = 0; i < x -> N; i++ ){
         VEC(x,i) =  VEC(y,i);
@@ -129,7 +128,7 @@ void vector_copy( Vector *x, Vector *y )
 /*                     specified type and length, using the    */
 /*                     values in values[]                      */
 /*                                                             */
-/*              Defined in linear_algebra.c                    */
+/*                   Declared in vector_fun.h                  */
 /***************************************************************/
 
 void vector_initialize( Vector *new, int length,

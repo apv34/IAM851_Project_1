@@ -28,7 +28,7 @@ int runge_kutta( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vector
     w.N = u -> N;
 
     dudt( u, &s1, dx);
-    vec_add( u, 1, &s1, 0.5*dt, &w);
+    vector_add( u, 1, &s1, 0.5*dt, &w);
     if( isnan(s1.element[4]) )
     {
         printf( "s1 NAN\n" );
@@ -36,7 +36,7 @@ int runge_kutta( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vector
     }
 
     dudt( &w, &s2, dx );
-    vec_add( u, 1, &s2, 0.5*dt, &w);
+    vector_add( u, 1, &s2, 0.5*dt, &w);
     if( isnan(s2.element[4]) )
     {
         printf( "s2 NAN\n" );
@@ -44,7 +44,7 @@ int runge_kutta( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vector
     }
     
     dudt( &w, &s3, dx );
-    vec_add( u, 1, &s3, dt, &w);
+    vector_add( u, 1, &s3, dt, &w);
 
     if( isnan(s3.element[4]) )
     {
@@ -57,8 +57,8 @@ int runge_kutta( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vector
         printf( "s4 NAN\n" );
         return -1;
     }
-    #pragma omp parallel for
-    for( i = 0; i < 100; i++)
+    
+    for( i = 0; i < u -> N; i++)
     {
         VEC(u_n,i) = VEC(u,i) + dt/6*( s1.element[i] + 2 * s2.element[i] + 2* s3.element[i] + s4.element[i] );
     }

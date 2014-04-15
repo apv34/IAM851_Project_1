@@ -17,6 +17,16 @@ AM_PROG_CC_C_O
 # add -Wall if possible
 AX_CHECK_COMPILER_FLAGS([-Wall], [CFLAGS="$CFLAGS -Wall"])
 
+# add -lm if possible
+AX_CHECK_COMPILER_FLAGS([-lm], [CFLAGS="$CFLAGS -lm"])
+
+# find flags for using OpenMP
+AC_OPENMP
+CFLAGS="$CFLAGS $OPENMP_CFLAGS"
+
+# link with the math library if needed
+AC_CHECK_LIB([m], [sin])
+
 dnl For Fortran support, uncomment (remove "dnl") the following
 dnl AC_PROG_F77
 dnl if test -z "$F77" || test "X$F77" = "Xno"; then

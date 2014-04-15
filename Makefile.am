@@ -1,11 +1,14 @@
 
 ACLOCAL_AMFLAGS = -I m4
 
-#bin_PROGRAMS = \
-#        test_vec_write \
-#        test_scalar_product \
-#		test_mat_vec_mult \
-#		test_vec_add
+bin_PROGRAMS = \
+        test_kdv_simple \
+        test_kdv_two \
+        test_kdv_three \
+        test_kdv_scaling \
+        test_kdv_comp \
+        test_kdv_comp_two \
+        test_kdv_comp_three
 
 lib_LIBRARIES = libkdv.a
 libkdv_a_SOURCES = \
@@ -14,11 +17,22 @@ libkdv_a_SOURCES = \
         kdv_equation.h \
         kdv_equation.c \
         solver.h \
-        solver.c
+        solver.c \
+        test_kdv_simple.c \
+        test_kdv_two.c \
+        test_kdv_three.c \
+        test_kdv_scaling.c \
+        test_kdv_comp.c \
+        test_kdv_comp_two.c \
+        test_kdv_comp_three.c 
 		
 LDADD = libkdv.a
 
-#TESTS = test_vec_write \
-#        test_scalar_product \
-#		test_mat_vec_mult \
-#		test_vec_add
+TESTS = \
+        test_kdv_simple \
+        test_kdv_two \
+        test_kdv_three \
+        test_kdv_scaling \
+        test_kdv_comp \
+        test_kdv_comp_two \
+        test_kdv_comp_three
