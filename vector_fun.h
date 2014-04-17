@@ -28,6 +28,10 @@
 /*                             - Added more comments, in       */
 /*                                  effort to properly         */
 /*                                  Document the project       */
+/*                   4/17/2014 - Continued Adding more         */
+/*                                  comments, in effort to     */
+/*                                  properly  Document the     */
+/*                                  project                    */ 
 /*                                                             */
 /*                      Vector Operations                      */
 /*                         vector_fun.h                        */
@@ -38,6 +42,7 @@
 #include <stdio.h>
 #include <assert.h>
 
+/*********************** Definitions ***************************/
 #define VEC(v,i) (v -> element[i])
 
 #define MAX_SIZE 100000
@@ -48,6 +53,8 @@ typedef struct
     int N;
 } Vector;
 
+/*********************** Declarations **************************/
+    
 /***************************************************************/
 /*            vector_add - Takes two vectors and adds the two  */
 /*                     vectors and stores it in a third vector */
@@ -74,9 +81,8 @@ typedef struct
 /*                                                             */
 /*            Side Effects: If there is a dimension mismatch   */
 /*                     there will be an assertion failure.     */
-/*                     The contents of z are reset to zero,    */
-/*                     and then the result of the operation    */
-/*                     is stored in z.                         */
+/*                     The result of the operation is stored   */
+/*                     in z.                                   */
 /*                                                             */
 /*                    Defined in vector_fun.c                  */
 /***************************************************************/
@@ -104,30 +110,21 @@ void vector_add( Vector* x, double a, Vector* y, double b,
 void vector_write(Vector *x, char* file_name);
 
 /***************************************************************/
-/*            vector_copy - Copies vector y into vector b      */
+/*            vector_copy - Copies vector y into vector x      */
 /*                                                             */
 /*            Input: x -- a pointer to a Vector struct that    */
 /*                     stores N values in an array of doubles, */
-/*                     and the length N of the vector          */
+/*                     and the length N of the vector, that    */
+/*                     will be overwritten                     */
 /*                   y -- a pointer to a Vector struct that    */
 /*                     stores N values in an array of doubles, */
 /*                     and the length N of the vector          */
-/*                   b -- a double that corresponds to the     */
-/*                     scalar multiple that y is to be         */
-/*                     multiplied by                           */
-/*                   z -- a pointer to a Vector struct that    */
-/*                     stores N values in an array of doubles, */
-/*                     the value N, and the vector type of the */
-/*                     vector that will store the result of    */
-/*                     a*x+b*y                                 */
 /*                                                             */
 /*            Output: NONE                                     */
 /*                                                             */
-/*            Side Effects: If there is a dimension mismatch   */
-/*                     there will be an assertion failure.     */
-/*                     The contents of z are reset to zero,    */
-/*                     and then the result of the operation    */
-/*                     is stored in z.                         */
+/*            Side Effects: The size of x is replaced with the */
+/*                     size of y and then overwritten with the */
+/*                     values in y                             */
 /*                                                             */
 /*                    Defined in vector_fun.c                  */
 /***************************************************************/
@@ -139,9 +136,6 @@ void vector_copy( Vector *x, Vector *y );
 /*                                                             */
 /*            Input: new -- a pointer to a Vector struct that  */
 /*                     will be initialized                     */
-/*                   type -- specifies the type of the vector  */
-/*                     This is to be used with the Vector_Type */
-/*                     enum and the values COLUMN and ROW      */
 /*                   length -- specifies the length of the     */
 /*                     vector                                  */
 /*                   values -- an array of doubles that        */

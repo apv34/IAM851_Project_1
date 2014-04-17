@@ -3,7 +3,7 @@
 #include "kdv_equation.h"
 #include "solver.h"
 
-#define RUN 7
+#define RUN 5
 
 int main()
 {
@@ -31,7 +31,7 @@ int main()
             (double[MAX_SIZE]) {0,0}, MAX_SIZE );
         simple_sec( &u, dx, 1, 4 );
         beg = WTime();
-        for( k = 0; k*dt < 4; k++ )
+        for( k = 0; k*dt < 1; k++ )
         {
             valid = runge_kutta( dt, &u, dx, &u_n, pdu_pdt);
             vector_copy( &u, &u_n);

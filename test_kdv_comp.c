@@ -7,7 +7,7 @@ void initial( Vector *u0, double dx )
 {
     int i;
     for( i = 0; i < u0 -> N; i++ )
-        VEC(u0,i) = 2/ pow(cosh(dx*i-2), 2)+ 2/ pow(cosh(dx*i-6), 2);
+        VEC(u0,i) = 2/ pow(cosh(dx*i-2), 2)+ 2/ pow(cosh(dx*i-5), 2);
 }
 
 int main()
