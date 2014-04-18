@@ -4,8 +4,8 @@
 #include "solver.h"
 #include "omp.h"
 
-#define RUN 6
-#define M 8
+#define RUN 4
+#define M 3
 
 int main()
 {
@@ -63,7 +63,7 @@ int main()
                 {
                     printf("ERROR!\n");
                     printf( "%f\n", k*dt);
-                    assert( valid != -1 );
+                    //assert( valid != -1 );
                     break;
                 }
             }
@@ -72,12 +72,31 @@ int main()
             fprintf( output, "%d - %f\n", N, time[j][i]);
         }
     }
+    fclose(output);
+    output = fopen( "parallel_scaling_format.txt", "w" );
+    fprintf( output, "      N     " );
+    for( j = 0; j < M; j++ ){
+        fprintf( output, "%13d ", j+1);
+    }
+    fprintf(output, "\n" );
+    for( i = 0; i < RUN; i++ ){
+        fprintf( output, "N = %6f  ", 64*pow(2, i ));
+        for( j = 0; j < M; j++ ) {
+            fprintf( output, "%13f ",  time[j][i] );
+        }
+        fprintf( output, "\n" );
+    }
     
     printf( "KdV solution of 2*sech^2(x+4) for 4s:\n" );
+    printf( "      N     " );
+    for( j = 0; j < M; j++ ){
+        printf( "%13d ", j+1);
+    }
+    printf( "\n" );
     for( i = 0; i < RUN; i++ ){
         printf( "N = %6f  ", 64*pow(2, i ));
         for( j = 0; j < M; j++ ) {
-            printf( "%d: %fs  ", j+1, time[j][i] );
+            printf(  "%13f ",  time[j][i] );
         }
         printf( "\n" );
     }
