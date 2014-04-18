@@ -13,7 +13,7 @@ int main()
     int N = 100;
     double dx = 8/((double)N-1);
     double dt = pow(dx, 3);
-    double beg, end;
+    double beg, end, pb, pe;
     int i = 0;
     int k = 0;
     int write = 10;
@@ -37,6 +37,7 @@ int main()
     {
         if( k % write == 0 )
         {
+			pb = WTime();
             vector_write( &u, "simple.txt" );
             i++;
             if( i / (double) steps == .25 )
@@ -45,10 +46,18 @@ int main()
                 printf( "50%% Completed\n" );
             else if(  i / (double) steps == .75 )
                 printf( "75%% Completed\n" );
+			pe = WTime();
+			printf( "Write Took: %fs\n", pe - pb );
         }
         k++;
+		pb =WTime();
         valid = runge_kutta( dt, &u, dx, &u_n, pdu_pdt);
+		pe = WTime();
+		printf ( "RK4 took  %fs\n", pe - pb );
+		pb = WTime();
         vector_copy( &u, &u_n);
+		pe = WTime();
+		printf ("Copy took: %fs\n", pe- pb );
         if( valid == -1 )
         {
             printf("ERROR!\n");

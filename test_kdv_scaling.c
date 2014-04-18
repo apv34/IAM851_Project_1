@@ -3,7 +3,7 @@
 #include "kdv_equation.h"
 #include "solver.h"
 
-#define RUN 5
+#define RUN 6
 
 int main()
 {

@@ -9,6 +9,7 @@ int runge_kutta( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vector
     Vector s4;
     Vector w;
     int i;
+	double beg, end;
     /*
     vector_initialize( &s1, u_n -> N,
         (double[MAX_SIZE]) {0,0}, MAX_SIZE );
@@ -57,10 +58,11 @@ int runge_kutta( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vector
         printf( "s4 NAN\n" );
         return -1;
     }
-    
+    //#pragma omp parallel for
     for( i = 0; i < u -> N; i++)
     {
         VEC(u_n,i) = VEC(u,i) + dt/6*( s1.element[i] + 2 * s2.element[i] + 2* s3.element[i] + s4.element[i] );
     }
+
     return 0;
 }
