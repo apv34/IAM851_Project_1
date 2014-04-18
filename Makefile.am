@@ -10,7 +10,8 @@ bin_PROGRAMS = \
         test_kdv_comp_two \
         test_kdv_comp_three \
         test_kdv_long \
-        test_kdv_parallel_scaling
+        test_kdv_parallel_scaling \
+        test_kdv_parallel
 
 lib_LIBRARIES = libkdv.a
 libkdv_a_SOURCES = \
@@ -28,7 +29,8 @@ libkdv_a_SOURCES = \
         test_kdv_comp_two.c \
         test_kdv_comp_three.c \
         test_kdv_long.c \
-        test_kdv_parallel_scaling.c
+        test_kdv_parallel_scaling.c \
+        test_kdv_parallel.c
 		
 LDADD = libkdv.a
 
@@ -41,4 +43,5 @@ TESTS = \
         test_kdv_comp_two \
         test_kdv_comp_three \
         test_kdv_long \
-        test_kdv_parallel_scaling
+        test_kdv_parallel_scaling \
+        test_kdv_parallel
