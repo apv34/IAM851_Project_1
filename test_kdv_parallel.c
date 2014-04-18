@@ -22,18 +22,25 @@ int main()
     int j = 0;
     int valid;
     FILE* output;
-    int n_threads = omp_get_num_threads();
+    //int n_threads = omp_get_num_threads();
 
     printf( "Test KdV Scaling Parallel\n" );
     output = fopen( "parallel_scaling.txt", "w" );
-    fprintf( output,"Test KdV Scaling Parallel" )
+    fprintf( output,"Test KdV Scaling Parallel" );
     fprintf( output,"KdV solution of 2*sech^2(x+4) for 4s:\n" );
 
-    for( j = 0; j < Ml j++ ){
-        omp_set_num_threads(i+1);
-        n_threads = omp_get_num_threads();
-        fprintf( output,"Parallel %d\n", j+1 );
-        printf( "Parallel %d\n", n_threads );
+    for( j = 0; j < M; j++ ){
+        omp_set_num_threads(j+1);
+        #pragma omp parallel
+        {
+            int n_threads = omp_get_num_threads();
+            int thread = omp_get_thread_num();
+            if( thread == 0 )
+            {
+                fprintf( output,"Parallel %d\n", j+1 );
+                printf( "Parallel %d\n", n_threads );
+            }
+        }
         N = 32;
         dx = 8/((double)N-1);
         dt = pow(dx, 3);
@@ -68,7 +75,7 @@ int main()
     
     printf( "KdV solution of 2*sech^2(x+4) for 4s:\n" );
     for( i = 0; i < RUN; i++ ){
-        printf( "N = %6f  "
+        printf( "N = %6f  ", 64*pow(2, i ));
         for( j = 0; j < M; j++ ) {
             printf( "%d: %fs  ", j+1, time[j][i] );
         }

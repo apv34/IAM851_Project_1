@@ -25,4 +25,4 @@ test_kdv_comp_three
 test_kdv_scaling
 test_kdv_long
 test_kdv_parallel_scaling
-
+test_kdv_parallel
