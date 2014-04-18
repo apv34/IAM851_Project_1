@@ -4,8 +4,8 @@
 #include "solver.h"
 #include "omp.h"
 
-#define RUN 4
-#define M 3
+#define RUN 6
+#define M 8
 
 int main()
 {
@@ -80,7 +80,7 @@ int main()
     }
     fprintf(output, "\n" );
     for( i = 0; i < RUN; i++ ){
-        fprintf( output, "N = %6f  ", 64*pow(2, i ));
+        fprintf( output, "N = %6.0f  ", 64*pow(2, i ));
         for( j = 0; j < M; j++ ) {
             fprintf( output, "%13f ",  time[j][i] );
         }
@@ -94,7 +94,7 @@ int main()
     }
     printf( "\n" );
     for( i = 0; i < RUN; i++ ){
-        printf( "N = %6f  ", 64*pow(2, i ));
+        printf( "N = %6.0f  ", 64*pow(2, i ));
         for( j = 0; j < M; j++ ) {
             printf(  "%13f ",  time[j][i] );
         }
