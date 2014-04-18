@@ -4,8 +4,8 @@
 #include "solver.h"
 #include "omp.h"
 
-#define RUN 3
-#define M 4
+#define RUN 6
+#define M 8
 
 int main()
 {
