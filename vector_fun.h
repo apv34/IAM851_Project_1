@@ -31,7 +31,8 @@
 /*                   4/17/2014 - Continued Adding more         */
 /*                                  comments, in effort to     */
 /*                                  properly  Document the     */
-/*                                  project                    */ 
+/*                                  project                    */
+/*                   4/17/2014 - Added OpenMP Parallelization  */
 /*                                                             */
 /*                      Vector Operations                      */
 /*                         vector_fun.h                        */

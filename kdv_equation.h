@@ -13,6 +13,7 @@
 /*                   4/17/2014 - Added more comments, in       */
 /*                                  effort to properly         */
 /*                                  Document the project       */
+/*                   4/17/2014 - Added OpenMP Parallelization  */
 /*                                                             */
 /*                       KdV Definitions                       */
 /*                       kdv_equation.h                        */

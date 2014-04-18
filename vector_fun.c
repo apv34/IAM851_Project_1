@@ -52,7 +52,7 @@ void vector_add( Vector* x, double a, Vector* y, double b, Vector* z)
     // Reset the contents of z
     //vector_initialize( z, x -> N,
         //(double[MAX_SIZE]) {0,0}, MAX_SIZE );
-    
+    #pragma omp parallel for
     for( int i = 0; i < x -> N; i++ ){
         VEC(z,i) = a * VEC(x,i) + b * VEC(y,i);
     }
@@ -119,6 +119,7 @@ void vector_copy( Vector *x, Vector *y )
     //vector_initialize( x, y -> N,
         //(double[MAX_SIZE]) {0,0}, MAX_SIZE );
     x -> N = y -> N;    
+    #pragma omp parallel for
     for( int i = 0; i < y -> N; i++ ){
         VEC(x,i) =  VEC(y,i);
     }
