@@ -1,7 +1,28 @@
-
+/***************************************************************/
+/*                       Anthony Edmonds                       */
+/*                  IAM 851 Project 1 4/22/2014                */
+/*                                                             */
+/*                   KdV Test With Simple Wave                 */
+/*                                                             */
+/*                                                             */
+/*                Purpose:                                     */
+/*                    To test the RK4 method used to solve the */
+/*                       KdV equation for a simple input wave  */
+/*                       of 2 sech^2(x-4) and output the       */
+/*                       resulting solution to a text file     */
+/*                       to be plotted using gnuplot or MATLAB */
+/*                                                             */
+/*                Input:                                       */
+/*                    - None.                                  */
+/*                                                             */
+/*                Output:                                      */
+/*                    - The result of the matrix               */
+/*                       multiplication function.              */
+/***************************************************************/
 #include <stdio.h>
 #include "kdv_equation.h"
 #include "solver.h"
+
 
 
 int main()
@@ -13,7 +34,10 @@ int main()
     int N = 100;
     double dx = 8/((double)N-1);
     double dt = pow(dx, 3);
-    double beg, end, pb, pe;
+    double beg, end;
+    #ifdef PROFILE
+    double pb, pe;
+    #endif
     int i = 0;
     int k = 0;
     int write = 10;
@@ -37,7 +61,7 @@ int main()
     {
         if( k % write == 0 )
         {
-			pb = WTime();
+            START
             vector_write( &u, "simple.txt" );
             i++;
             if( i / (double) steps == .25 )
@@ -46,18 +70,24 @@ int main()
                 printf( "50%% Completed\n" );
             else if(  i / (double) steps == .75 )
                 printf( "75%% Completed\n" );
-			pe = WTime();
-			printf( "Write Took: %fs\n", pe - pb );
+			END
+            #ifdef PROFILE
+			printf( "Write Took: %fs\n", PTIME );
+            #endif
         }
         k++;
-		pb =WTime();
+		START
         valid = runge_kutta( dt, &u, dx, &u_n, pdu_pdt);
-		pe = WTime();
-		printf ( "RK4 took  %fs\n", pe - pb );
-		pb = WTime();
+		END
+        #ifdef PROFILE    
+		printf ( "RK4 took  %fs\n", PTIME);
+        #endif
+		START
         vector_copy( &u, &u_n);
-		pe = WTime();
-		printf ("Copy took: %fs\n", pe- pb );
+		END
+        #ifdef PROFILE
+		printf ("Copy took: %fs\n", PTIME );
+        #endif
         if( valid == -1 )
         {
             printf("ERROR!\n");
