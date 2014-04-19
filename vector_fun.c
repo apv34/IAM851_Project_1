@@ -40,7 +40,8 @@
 /*                   Declared in vector_fun.h                  */
 /***************************************************************/
 
-void vector_add( Vector* x, double a, Vector* y, double b, Vector* z)
+void vector_add( Vector* x, double a, Vector* y, double b, 
+    Vector* z)
 {
     // Check Vector Lengths
     if( x -> N != y -> N )
@@ -48,10 +49,6 @@ void vector_add( Vector* x, double a, Vector* y, double b, Vector* z)
         printf( "Error at Vector Add: Vector size mismatch\n" );
         assert( x -> N == y -> N );
     }
-    
-    // Reset the contents of z
-    //vector_initialize( z, x -> N,
-        //(double[MAX_SIZE]) {0,0}, MAX_SIZE );
     #pragma omp parallel for
     for( int i = 0; i < x -> N; i++ ){
         VEC(z,i) = a * VEC(x,i) + b * VEC(y,i);
@@ -159,6 +156,7 @@ void vector_initialize( Vector *new, int length,
         printf( "Length is larger than MAX_SIZE!\n" );
         assert( length >= MAX_SIZE );
     }
+    #pragma omp parallel for
     for( i = 0; i < MAX_SIZE; i++ )
     {
         if( i < length )

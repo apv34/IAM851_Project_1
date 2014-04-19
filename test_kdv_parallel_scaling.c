@@ -9,7 +9,8 @@
 int runge_kutta_np( double dt, Vector *u, double dx, Vector *u_n,
     void dudt (Vector *, Vector *, double));
 
-void vector_add_np( Vector* x, double a, Vector* y, double b, Vector* z);
+void vector_add_np( Vector* x, double a, Vector* y,
+    double b, Vector* z);
 
 void pdu_pdt_np( Vector *u, Vector *s, double dx );
 
@@ -38,7 +39,7 @@ int main()
     
     sprintf(filename, "parallel_scaling_%d.txt",n_threads); 
     output = fopen( filename, "w" );
-    fprintf( output,"Test KdV Scaling Parallel Vs UnParallel for "
+    fprintf(output,"Test KdV Scaling Parallel Vs UnParallel for "
         "%d Threads\n", n_threads);
     fprintf( output,"KdV solution of 2*sech^2(x+4) for 4s:\n" );
     fprintf( output,"Standard\n" );
@@ -55,7 +56,7 @@ int main()
         beg = WTime();
         for( k = 0; k*dt < 1; k++ )
         {
-            valid = runge_kutta_np( dt, &u, dx, &u_n, pdu_pdt_np);
+            valid = runge_kutta_np(dt, &u, dx, &u_n, pdu_pdt_np);
             vector_copy_np( &u, &u_n);
             if( valid == -1 )
             {
@@ -106,7 +107,8 @@ int main()
     
     printf( "KdV solution of 2*sech^2(x+4) for 4s:\n" );
     for( i = 0; i < RUN; i++ ){
-        printf( "N = %6f  Took: %fs\tParallel: %fs\n", 128*pow(2, i ), time[i], ptime[i]);
+        printf( "N = %6f  Took: %fs\tParallel: %fs\n", 
+            128*pow(2, i ), time[i], ptime[i]);
     }
     
     fclose( output );
@@ -114,7 +116,8 @@ int main()
 }
 
 
-int runge_kutta_np( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vector *, Vector *, double))
+int runge_kutta_np( double dt, Vector *u, double dx, 
+    Vector *u_n, void dudt (Vector *, Vector *, double))
 {
     Vector s1;
     Vector s2;
@@ -162,13 +165,15 @@ int runge_kutta_np( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vec
     
     for( i = 0; i < u -> N; i++)
     {
-        VEC(u_n,i) = VEC(u,i) + dt/6*( s1.element[i] + 2 * s2.element[i] + 2* s3.element[i] + s4.element[i] );
+        VEC(u_n,i) = VEC(u,i) + dt/6*( s1.element[i] + 
+            2* s2.element[i] + 2* s3.element[i] + s4.element[i]);
     }
 
     return 0;
 }
 
-void vector_add_np( Vector* x, double a, Vector* y, double b, Vector* z)
+void vector_add_np( Vector* x, double a, Vector* y, double b, 
+    Vector* z)
 {
     // Check Vector Lengths
     if( x -> N != y -> N )
@@ -181,21 +186,64 @@ void vector_add_np( Vector* x, double a, Vector* y, double b, Vector* z)
     }
 }
 
+
+/***************************************************************/
+/*            pdu_pdt_np - Uses the passed pointer to u to use */
+/*                     a finite difference approximation of    */
+/*                     right-hand side of the KdV equation     */
+/*                     to get the time rate of change of u     */
+/*                     and stores it in Vector s               */
+/*                     Has NO parallel aspect for testing      */
+/*                                                             */
+/*            Input: u -- a pointer to a Vector struct that    */
+/*                     stores the values to be descritized     */
+/*                     over                                    */
+/*                   s -- a pointer to a Vector struct that    */
+/*                     will store the result of the finite     */
+/*                     differences                             */
+/*                   dx -- a double that is the spacing to be  */
+/*                     used in the finite differences          */
+/*                                                             */
+/*            Output: NONE                                     */
+/*                                                             */
+/*            Side Effects: Sets the vector s to the time      */
+/*                     rate of change of the descritized KdV   */
+/*                     equation                                */
+/*                                                             */
+/***************************************************************/
+
 void pdu_pdt_np( Vector *u, Vector *s, double dx )
 {
     int i;
     double dx_3 = pow(dx,3);
     for( i = 0; i < u -> N; i++ )
     { 
-        VEC(s,i) = -6 * VEC(u,i) * du_x(u,i,dx) - du_xxx(u,i,dx_3);
+        VEC(s,i) = -6 * VEC(u,i) *du_x(u,i,dx) -du_xxx(u,i,dx_3);
     }
 }
-    
+
+
+/***************************************************************/
+/*            vector_copy_np - Copies vector y into vector x   */
+/*                     Has NO parallel aspect for testing      */
+/*                                                             */
+/*            Input: x -- a pointer to a Vector struct that    */
+/*                     stores N values in an array of doubles, */
+/*                     and the length N of the vector, that    */
+/*                     will be overwritten                     */
+/*                   y -- a pointer to a Vector struct that    */
+/*                     stores N values in an array of doubles, */
+/*                     and the length N of the vector          */
+/*                                                             */
+/*            Output: NONE                                     */
+/*                                                             */
+/*            Side Effects: The size of x is replaced with the */
+/*                     size of y and then overwritten with the */
+/*                     values in y                             */
+/***************************************************************/
+
 void vector_copy_np( Vector *x, Vector *y )
 {
-    // Reset the contents of x
-    //vector_initialize( x, y -> N,
-        //(double[MAX_SIZE]) {0,0}, MAX_SIZE );
     x -> N = y -> N;    
     for( int i = 0; i < y -> N; i++ ){
         VEC(x,i) =  VEC(y,i);

@@ -98,7 +98,7 @@ int main()
     }
     end = WTime();
     
-    printf( "RK4 with %d Points written every %d steps", N, write);
+    printf("RK4 with %d Points written every %d steps", N,write);
     printf( " for %d Steps took: %fs\n", steps, end-beg);
     printf( "For a simulation of %fs\n", k*dt);
     

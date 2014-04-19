@@ -13,7 +13,7 @@ int main()
     int N = 4096;
     double dx = 8/((double)N-1);
     double dt = pow(dx, 3);
-    double beg, end, pb, pe;
+    double beg, end;
     int i = 0;
     int k = 0;
     int write = 10;
@@ -30,14 +30,13 @@ int main()
     output = fopen( "many.txt", "w" );
     fclose( output );
     end = WTime();
-    //printf( "Set-up took: %fs\n", end-beg);
+    printf( "Set-up took: %fs\n", end-beg);
     
     beg = WTime();
     while( i < steps )
     {
         if( k % write == 0 )
         {
-			pb = WTime();
             vector_write( &u, "many.txt" );
             i++;
             if( i / (double) steps == .25 )
@@ -46,18 +45,10 @@ int main()
                 printf( "50%% Completed\n" );
             else if(  i / (double) steps == .75 )
                 printf( "75%% Completed\n" );
-			pe = WTime();
-			//printf( "Write Took: %fs\n", pe - pb );
         }
         k++;
-		pb =WTime();
         valid = runge_kutta( dt, &u, dx, &u_n, pdu_pdt);
-		pe = WTime();
-		//printf ( "RK4 took  %fs\n", pe - pb );
-		pb = WTime();
         vector_copy( &u, &u_n);
-		pe = WTime();
-		//printf ("Copy took: %fs\n", pe- pb );
         if( valid == -1 )
         {
             printf("ERROR!\n");
@@ -68,7 +59,7 @@ int main()
     }
     end = WTime();
     
-    printf( "RK4 with %d Points written every %d steps", N, write);
+    printf("RK4 with %d Points written every %d steps", N,write);
     printf( " for %d Steps took: %fs\n", steps, end-beg);
     printf( "For a simulation of %fs\n", k*dt);
     

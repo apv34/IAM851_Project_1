@@ -15,6 +15,10 @@
 /*                             - Replaced spot NaN checks with */
 /*                                  a check at every point in  */
 /*                                  s4                         */
+/*                             - Returned to a random spot     */
+/*                                  check at s4[0] as OpenMP   */
+/*                                  will error with it in the  */
+/*                                  parallelized for loop      */
 /*                                                             */
 /*                 Runge-Kutta 4th Order Solver                */
 /*                          solver.h                           */
@@ -82,7 +86,7 @@
 /*                         checked, or the points are poorly   */
 /*                         behaved                             */
 /*                                                             */
-/*                   Declared in vector_fun.h                  */
+/*                      Defined in solver.c                    */
 /***************************************************************/
 
 int runge_kutta( double dt, Vector *u, double dx, Vector *u_n,

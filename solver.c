@@ -12,8 +12,8 @@
 /*            runge_kutta - Preforms an RK4 numeric            */
 /*                     integration on vector u using time step */
 /*                     dt, spacing dx, and the function handle */
-/*                      dudt the time rate of change of u and  */
-/*                      stoires the result in Vector u_n       */
+/*                     dudt the time rate of change of u and   */
+/*                     stoires the result in Vector u_n        */
 /*                                                             */
 /*            Input: dt -- a double that is the time step of   */
 /*                     the RK4 solver                          */
@@ -49,9 +49,10 @@
 /*                         checked, or the points are poorly   */
 /*                         behaved                             */
 /*                                                             */
-/*                   Declared in vector_fun.h                  */
+/*                     Declared in solver.h                    */
 /***************************************************************/
-int runge_kutta( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vector *, Vector *, double))
+int runge_kutta( double dt, Vector *u, double dx, Vector *u_n, 
+    void dudt (Vector *, Vector *, double))
 {
     Vector s1;
     Vector s2;
@@ -80,17 +81,15 @@ int runge_kutta( double dt, Vector *u, double dx, Vector *u_n, void dudt (Vector
 
     // k4
     dudt( &w, &s4, dx);
+    if( isnan(s4.element[0]) )
+        return -1;
     
     // Final Summation
     #pragma omp parallel for
     for( i = 0; i < u -> N; i++)
     {
-        VEC(u_n,i) = VEC(u,i) + dt/6*( s1.element[i] + 2 * s2.element[i] + 2* s3.element[i] + s4.element[i] );
-        if( isnan(s4.element[i]) )
-        {
-            printf( "s4 NAN\n" );
-            return -1;
-        }
+        VEC(u_n,i) = VEC(u,i) + dt/6*( s1.element[i] + 2
+            * s2.element[i] + 2* s3.element[i] + s4.element[i] );
     }
 
     return 0;
