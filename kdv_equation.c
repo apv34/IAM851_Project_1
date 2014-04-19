@@ -4,7 +4,7 @@
 /*                         Spring 2014                         */
 /*                                                             */
 /*                       KdV Definitions                       */
-/*                       kdv_equation.h                        */
+/*                       kdv_equation.c                        */
 /***************************************************************/
 #include "kdv_equation.h"
 

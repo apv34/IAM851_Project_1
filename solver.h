@@ -12,6 +12,9 @@
 /*                             - Added comments                */
 /*                             - Added PROFILING Command       */
 /*                                  definition                 */
+/*                             - Replaced spot NaN checks with */
+/*                                  a check at every point in  */
+/*                                  s4                         */
 /*                                                             */
 /*                 Runge-Kutta 4th Order Solver                */
 /*                          solver.h                           */
