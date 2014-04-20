@@ -49,6 +49,7 @@ void vector_add( Vector* x, double a, Vector* y, double b,
         printf( "Error at Vector Add: Vector size mismatch\n" );
         assert( x -> N == y -> N );
     }
+    z -> N = x -> N;
     #pragma omp parallel for
     for( int i = 0; i < x -> N; i++ ){
         VEC(z,i) = a * VEC(x,i) + b * VEC(y,i);
