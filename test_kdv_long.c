@@ -1,4 +1,29 @@
-
+/***************************************************************/
+/*                       Anthony Edmonds                       */
+/*                  IAM 851 Project 1 4/22/2014                */
+/*                                                             */
+/*                    KdV Test With Long Wave                  */
+/*                                                             */
+/*                                                             */
+/*                Purpose:                                     */
+/*                    To test the RK4 method used to solve the */
+/*                       KdV equation for a simple input wave  */
+/*                       of 2 sech^2(x-4) for 4096 points and  */
+/*                       output the resulting solution to a    */
+/*                       text file to be plotted using gnuplot */
+/*                       or MATLAB                             */
+/*                                                             */
+/*                Input:                                       */
+/*                    - None.                                  */
+/*                                                             */
+/*                Output:                                      */
+/*                Output:                                      */
+/*                    - The result of the the RK4 for 10000    */
+/*                       steps every 10 iterations of RK4 to   */
+/*                       the file many.txt                     */
+/*                    - The Progress of the solver and the     */
+/*                       resultant time of the simulation      */
+/***************************************************************/
 #include <stdio.h>
 #include "kdv_equation.h"
 #include "solver.h"

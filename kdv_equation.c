@@ -113,7 +113,7 @@ double du_xxx( Vector *u, int i, double dx_3 )
             / (2*dx_3);
     else if( i == 1 )
         return (( VEC(u,i+2)-2*VEC(u,i+1) + VEC(u,i) ) - 
-            (VEC(u,i) -2*VEC(u,i-1)+VEC(u,(u -> N)-1) ) )/ (2*dx_3);
+            (VEC(u,i) -2*VEC(u,i-1)+VEC(u,(u->N)-1) ) )/(2*dx_3);
     else if( i == (u -> N)-1)
         return (( VEC(u,1)-2*VEC(u,0) + VEC(u,i) ) - 
             (VEC(u,i) -2*VEC(u,i-1)+VEC(u,i-2) ) )/ (2*dx_3);
@@ -142,7 +142,7 @@ double du_xxx( Vector *u, int i, double dx_3 )
 /*                     of the wave                             */
 /*                   loc -- a double that defines the where    */
 /*                     the center of the wave is. Positive     */
-/*                     values shif the wave to the right       */
+/*                     values shift the wave to the right      */
 /*                                                             */
 /*            Output: NONE                                     */
 /*                                                             */

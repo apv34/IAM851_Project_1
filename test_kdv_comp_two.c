@@ -1,15 +1,57 @@
-
+/***************************************************************/
+/*                       Anthony Edmonds                       */
+/*                  IAM 851 Project 1 4/22/2014                */
+/*                                                             */
+/*                 KdV Test With Compound Wave Two             */
+/*                                                             */
+/*                                                             */
+/*                Purpose:                                     */
+/*                    To test the RK4 method used to solve the */
+/*                       KdV equation for a compound input     */
+/*                       wave of 2 sech^2(x-2) + 6 sech^2(x-6) */
+/*                       and output the resulting solution to  */
+/*                       text file to be plotted using gnuplot */
+/*                       or MATLAB                             */
+/*                                                             */
+/*                Input:                                       */
+/*                    - None.                                  */
+/*                                                             */
+/*                Output:                                      */
+/*                    - The result of the the RK4 for 10000    */
+/*                       steps every 10 iterations of RK4 to   */
+/*                       the file comp_wave_two.txt            */
+/*                    - The Progress of the solver and the     */
+/*                       resultant time of the simulation      */
+/***************************************************************/
 #include <stdio.h>
 #include "kdv_equation.h"
 #include "solver.h"
 
+
+/***************************************************************/
+/*            initial - Initializes u0 to a compound sech^2    */
+/*                     wave of 2 sech^2(x-2) + 6 sech^2(x-6)   */
+/*                                                             */
+/*            Input: u0 -- a pointer to a Vector struct that   */
+/*                     will stores the values of the initial   */
+/*                     sech^2 wave                             */
+/*                   dx -- a double that contains the spacing  */
+/*                     of the nodes                            */
+/*                                                             */
+/*            Output: NONE                                     */
+/*                                                             */
+/*            Side Effects: Sets u0 to the initial wave        */
+/***************************************************************/
 void initial( Vector *u0, double dx )
 {
     int i;
     for( i = 0; i < u0 -> N; i++ )
-        VEC(u0,i) = 2/ pow(cosh(dx*i-2), 2)+ 6/ pow(cosh(dx*i-6), 2);
+        VEC(u0,i) = 2/ pow(cosh(dx*i-2), 2)+ 6/ 
+            pow(cosh(dx*i-6), 2);
 }
 
+/***************************************************************/
+    
 int main()
 {
     Vector u;

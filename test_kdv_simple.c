@@ -16,13 +16,15 @@
 /*                    - None.                                  */
 /*                                                             */
 /*                Output:                                      */
-/*                    - The result of the matrix               */
-/*                       multiplication function.              */
+/*                    - The result of the the RK4 for 10000    */
+/*                       steps every 10 iterations of RK4 to   */
+/*                       the file simple.txt                   */
+/*                    - The Progress of the solver and the     */
+/*                       resultant time of the simulation      */
 /***************************************************************/
 #include <stdio.h>
 #include "kdv_equation.h"
 #include "solver.h"
-
 
 
 int main()
