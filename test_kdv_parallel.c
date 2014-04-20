@@ -25,7 +25,7 @@ int main()
     //int n_threads = omp_get_num_threads();
 
     printf( "Test KdV Scaling Parallel\n" );
-    output = fopen( "parallel_scaling.txt", "w" );
+    output = fopen( "parallel_scaling_2.txt", "w" );
     fprintf( output,"Test KdV Scaling Parallel" );
     fprintf( output,"KdV solution of 2*sech^2(x+4) for 4s:\n" );
 
@@ -73,7 +73,7 @@ int main()
         }
     }
     fclose(output);
-    output = fopen( "parallel_scaling_format.txt", "w" );
+    output = fopen( "parallel_scaling_format_2.txt", "w" );
     fprintf( output, "      N     " );
     for( j = 0; j < M; j++ ){
         fprintf( output, "%13d ", j+1);
