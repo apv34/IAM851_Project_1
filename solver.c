@@ -91,6 +91,6 @@ int runge_kutta( double dt, Vector *u, double dx, Vector *u_n,
         VEC(u_n,i) = VEC(u,i) + dt/6*( s1.element[i] + 2
             * s2.element[i] + 2* s3.element[i] + s4.element[i] );
     }
-
+    u_n -> N = u -> N;
     return 0;
 }

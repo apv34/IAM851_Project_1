@@ -19,6 +19,12 @@
 /*                                  check at s4[0] as OpenMP   */
 /*                                  will error with it in the  */
 /*                                  parallelized for loop      */
+/*                   4/18/2014 - Updated the size of u_n to    */
+/*                                  the size of u for          */
+/*                                  stability and consistency. */
+/*                                  The size is only updated   */
+/*                                  if the solver is           */
+/*                                  successful                 */
 /*                                                             */
 /*                 Runge-Kutta 4th Order Solver                */
 /*                          solver.h                           */
