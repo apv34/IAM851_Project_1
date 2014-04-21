@@ -159,3 +159,31 @@ void simple_sec( Vector *u0, double dx, double M,  double loc )
         VEC(u0, i) = (M*(M+1) )/ pow(cosh(dx*i-loc), 2);
     }
 }
+
+
+void print_timing( double numSteps, double dt, double writeEvery,  
+    double left, double right, double dx, char* file_name )
+{
+    int i = 0;
+    int k = 0;
+    FILE* output;
+    
+    output = fopen( file_name, 'w' );
+    // Time
+    while( i < numSteps)
+    {
+        if( k % writeEvery == 0 ) {
+            fprintf( output, "%f ", k*dt );
+            i++;
+        }
+        k++;
+    }
+    fprintf( output, "\n" );
+    // x
+    for( i = 0; (left+i*dx) < right; i++ )
+    {
+        fprintf( output, "%f ", left+i*dx );
+    }
+    fprintf( output, "\n" );
+    fclose(output);
+}
