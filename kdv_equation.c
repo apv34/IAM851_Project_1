@@ -161,7 +161,7 @@ void simple_sec( Vector *u0, double dx, double M,  double loc )
 }
 
 
-void print_timing( double numSteps, double dt, double writeEvery,  
+void print_timing( double numSteps, double dt, int writeEvery,  
     double left, double right, double dx, char* file_name )
 {
     int i = 0;

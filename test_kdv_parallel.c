@@ -38,7 +38,7 @@
 
 #define RUN 6
 #define M 8
-#define SIM_TIME 1
+#define SIM_TIME 1.0
 
 int main()
 {

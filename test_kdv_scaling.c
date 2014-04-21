@@ -24,7 +24,7 @@
 #include "solver.h"
 
 #define RUN 6
-#define SIM_TIME 1
+#define SIM_TIME 1.0
 
 int main()
 {

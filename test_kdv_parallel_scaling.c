@@ -31,7 +31,7 @@
 #include "omp.h"
 
 #define RUN 6
-#define SIM_TIME 1
+#define SIM_TIME 1.0
 
 int runge_kutta_np( double dt, Vector *u, double dx, Vector *u_n,
     void dudt (Vector *, Vector *, double));
