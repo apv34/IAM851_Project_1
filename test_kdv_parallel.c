@@ -29,7 +29,7 @@
 /*                    - The corresponding time is recorded to  */
 /*                       parallel_scaling_format.txt when all  */
 /*                       of the simulations are over to        */
-/*                       produce a formated table.             */
+/*                       produce a formatted table.            */
 /***************************************************************/
 #include <stdio.h>
 #include "kdv_equation.h"
@@ -59,7 +59,7 @@ int main()
     printf( "Test KdV Scaling Parallel\n" );
     output = fopen( "parallel_scaling_2.txt", "w" );
     fprintf( output,"Test KdV Scaling Parallel" );
-    fprintf( output,"KdV solution of 2*sech^2(x+4) for 4s:\n" );
+    fprintf( output,"KdV solution of 2*sech^2(x+4) for 1s:\n" );
 
     for( j = 0; j < M; j++ ){
         omp_set_num_threads(j+1);
@@ -119,7 +119,7 @@ int main()
         fprintf( output, "\n" );
     }
     
-    printf( "KdV solution of 2*sech^2(x+4) for 4s:\n" );
+    printf( "KdV solution of 2*sech^2(x+4) for 1s:\n" );
     printf( "      N     " );
     for( j = 0; j < M; j++ ){
         printf( "%13d ", j+1);

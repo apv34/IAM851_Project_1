@@ -66,7 +66,7 @@ int main()
         end = WTime();
         time[i] = end - beg;
     }
-    printf( "KdV solution of 2*sech^2(x+4) for 4s:\n" );
+    printf( "KdV solution of 2*sech^2(x+4) for 1s:\n" );
     for( i = 0; i < RUN; i++ ){
         printf( "N = %6f  Took: %fs\n", 128*pow(2, i ), time[i]);
     }

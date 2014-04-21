@@ -67,7 +67,7 @@ int main()
     output = fopen( filename, "w" );
     fprintf(output,"Test KdV Scaling Parallel Vs UnParallel for "
         "%d Threads\n", n_threads);
-    fprintf( output,"KdV solution of 2*sech^2(x+4) for 4s:\n" );
+    fprintf( output,"KdV solution of 2*sech^2(x+4) for 1s:\n" );
     fprintf( output,"Standard\n" );
     for( i = 0; i < RUN; i++ ){
         N = N*2;
@@ -131,7 +131,7 @@ int main()
     }
     
     
-    printf( "KdV solution of 2*sech^2(x+4) for 4s:\n" );
+    printf( "KdV solution of 2*sech^2(x+4) for 1s:\n" );
     for( i = 0; i < RUN; i++ ){
         printf( "N = %6f  Took: %fs\tParallel: %fs\n", 
             128*pow(2, i ), time[i], ptime[i]);
