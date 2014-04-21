@@ -37,9 +37,6 @@ int main()
     double dx = 8/((double)N-1);
     double dt = pow(dx, 3);
     double beg, end;
-    #ifdef PROFILE
-    double pb, pe;
-    #endif
     int i = 0;
     int k = 0;
     int write = 10;
@@ -53,7 +50,7 @@ int main()
     vector_initialize( &u_n, N,
         (double[MAX_SIZE]) {0,0}, MAX_SIZE );
     simple_sec( &u, dx, 1, 4 );
-    output = fopen( "simple.txt", "w" );
+    output = fopen( "short.txt", "w" );
     fclose( output );
     end = WTime();
     printf( "Set-up took: %fs\n", end-beg);
@@ -63,8 +60,7 @@ int main()
     {
         if( k % write == 0 )
         {
-            START
-            vector_write( &u, "simple.txt" );
+            vector_write( &u, "short.txt" );
             i++;
             if( i / (double) steps == .25 )
                 printf( "25%% Completed\n" );
@@ -72,24 +68,11 @@ int main()
                 printf( "50%% Completed\n" );
             else if(  i / (double) steps == .75 )
                 printf( "75%% Completed\n" );
-			END
-            #ifdef PROFILE
-			printf( "Write Took: %fs\n", PTIME );
-            #endif
         }
         k++;
-		START
+
         valid = runge_kutta( dt, &u, dx, &u_n, pdu_pdt);
-		END
-        #ifdef PROFILE    
-		printf ( "RK4 took  %fs\n", PTIME);
-        #endif
-		START
         vector_copy( &u, &u_n);
-		END
-        #ifdef PROFILE
-		printf ("Copy took: %fs\n", PTIME );
-        #endif
         if( valid == -1 )
         {
             printf("ERROR!\n");
@@ -102,6 +85,6 @@ int main()
     printf("RK4 with %d Points written every %d steps", N,write);
     printf( " for %d Steps took: %fs\n", steps, end-beg);
     printf( "For a simulation of %fs\n", k*dt);
-    print_timing( steps, dt, write, 0, 8, dx, "simple", "txt" );
+    print_timing( steps, dt, write, 0, 8, dx, "short", "txt" );
     return 0;
 }

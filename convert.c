@@ -33,8 +33,7 @@ int main(int argc, char *argv[] )
                 }
             }
             fclose(rotate);
-            rotate = fopen( "test_r.txt", "w" );
-            printf( "B\n" );
+            rotate = fopen( "rotated.txt", "w" );
             for( j = 0; j < cols; j++ )
             {
                 for( i = 0; i < rows; i++ )
@@ -42,8 +41,6 @@ int main(int argc, char *argv[] )
                 fprintf( rotate, "\n" );
             }
             fclose(rotate);
-            
-            printf( "C\n" );
         }
     }
     else
