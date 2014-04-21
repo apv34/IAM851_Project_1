@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_N 100000
+#define MAX_N 1000
 int main(int argc, char *argv[] )
 {
     int rows = 10;
@@ -33,7 +33,7 @@ int main(int argc, char *argv[] )
                 }
             }
             fclose(rotate);
-            rotate = fopen( "rotated.txt", "w" );
+            rotate = fopen( "test_r.txt", "w" );
             printf( "B\n" );
             for( j = 0; j < cols; j++ )
             {

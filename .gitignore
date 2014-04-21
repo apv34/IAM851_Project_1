@@ -26,3 +26,6 @@ test_kdv_scaling
 test_kdv_long
 test_kdv_parallel_scaling
 test_kdv_parallel
+convert
+test_kdv_short
+
