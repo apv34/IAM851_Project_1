@@ -162,28 +162,33 @@ void simple_sec( Vector *u0, double dx, double M,  double loc )
 
 
 void print_timing( double numSteps, double dt, int writeEvery,  
-    double left, double right, double dx, char* file_name )
+    double left, double right, double dx, char* file_name, 
+    char* extension )
 {
     int i = 0;
     int k = 0;
     FILE* output;
+    char name[MAX_WORD];
     
-    output = fopen( file_name, "w" );
+    sprintf( name, "%s_t.%s", file_name, extension );
+    output = fopen( name, "w" );
     // Time
+    
     while( i < numSteps)
     {
         if( k % writeEvery == 0 ) {
-            fprintf( output, "%f ", k*dt );
+            fprintf( output, "%f\n", k*dt );
             i++;
         }
         k++;
     }
-    fprintf( output, "\n" );
+    fclose( output );
+    sprintf( name, "%s_x.%s", file_name, extension );
+    output = fopen( name, "w" );
     // x
     for( i = 0; (left+i*dx) < right; i++ )
     {
-        fprintf( output, "%f ", left+i*dx );
+        fprintf( output, "%f\n", left+i*dx );
     }
-    fprintf( output, "\n" );
     fclose(output);
 }

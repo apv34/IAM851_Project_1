@@ -54,7 +54,7 @@ int main()
     double beg, end;
     double time[RUN] = { 0.0 };
     double ptime[RUN] = { 0.0 };
-    char filename[250];
+    char filename[MAX_WORD];
     int k = 0;
     int i = 0;
     int valid;
