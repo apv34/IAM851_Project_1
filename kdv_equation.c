@@ -169,7 +169,7 @@ void print_timing( double numSteps, double dt, int writeEvery,
     FILE* output;
     
     printf( "A\n" );
-    output = fopen( file_name, 'w' );
+    output = fopen( file_name, "w" );
     printf( "B\n" );
     // Time
     while( i < numSteps)
