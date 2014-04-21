@@ -168,7 +168,9 @@ void print_timing( double numSteps, double dt, int writeEvery,
     int k = 0;
     FILE* output;
     
+    printf( "A\n" );
     output = fopen( file_name, 'w' );
+    printf( "B\n" );
     // Time
     while( i < numSteps)
     {
@@ -178,6 +180,7 @@ void print_timing( double numSteps, double dt, int writeEvery,
         }
         k++;
     }
+    printf( "C\n" );
     fprintf( output, "\n" );
     // x
     for( i = 0; (left+i*dx) < right; i++ )
@@ -185,5 +188,7 @@ void print_timing( double numSteps, double dt, int writeEvery,
         fprintf( output, "%f ", left+i*dx );
     }
     fprintf( output, "\n" );
+    printf( "D\n" );
     fclose(output);
+    printf( "E\n" );
 }
