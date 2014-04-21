@@ -24,6 +24,7 @@
 #include "solver.h"
 
 #define RUN 6
+#define SIM_TIME 1
 
 int main()
 {
@@ -51,7 +52,7 @@ int main()
             (double[MAX_SIZE]) {0,0}, MAX_SIZE );
         simple_sec( &u, dx, 1, 4 );
         beg = WTime();
-        for( k = 0; k*dt < 1; k++ )
+        for( k = 0; k*dt < SIM_TIME; k++ )
         {
             valid = runge_kutta( dt, &u, dx, &u_n, pdu_pdt);
             vector_copy( &u, &u_n);
@@ -66,7 +67,7 @@ int main()
         end = WTime();
         time[i] = end - beg;
     }
-    printf( "KdV solution of 2*sech^2(x+4) for 1s:\n" );
+    printf( "KdV solution of 2*sech^2(x+4) for %0.3fs:\n", SIM_TIME );
     for( i = 0; i < RUN; i++ ){
         printf( "N = %6f  Took: %fs\n", 128*pow(2, i ), time[i]);
     }
