@@ -1,4 +1,30 @@
-
+/***************************************************************/
+/*                       Anthony Edmonds                       */
+/*                  IAM 851 Project 1 4/22/2014                */
+/*                                                             */
+/*               KdV Scaling Test Parallel Comparison          */
+/*                                                             */
+/*                                                             */
+/*                Purpose:                                     */
+/*                    To test the scaling of the RK4 method    */
+/*                       for the following values of N: 64,    */
+/*                       128, 256, 512, 1024 and 2048          */
+/*                       This test will initially run on one   */
+/*                       thread and then will run on the       */
+/*                       number of threads specified at run    */
+/*                       time                                  */
+/*                                                             */
+/*                Input:                                       */
+/*                    - None.                                  */
+/*                                                             */
+/*                Output:                                      */
+/*                    - The Progress of the solver and the     */
+/*                       resultant time of the simulation      */
+/*                    - The number of points and corresponding */
+/*                       time will be recorded to              */
+/*                       parallel_scaling_N.txt where N is the */
+/*                       number of threads the test is run on  */
+/***************************************************************/
 #include <stdio.h>
 #include "kdv_equation.h"
 #include "solver.h"
@@ -115,6 +141,48 @@ int main()
     return 0;
 }
 
+/***************************************************************/
+/*            runge_kutta_np - Preforms an RK4 numeric         */
+/*                     integration on vector u using time step */
+/*                     dt, spacing dx, and the function handle */
+/*                     dudt the time rate of change of u and   */
+/*                     stores the result in Vector u_n         */
+/*                     Has NO parallel aspect for testing      */
+/*                                                             */
+/*            Input: dt -- a double that is the time step of   */
+/*                     the RK4 solver                          */
+/*                   u -- a pointer to a Vector struct that    */
+/*                     stores the values of the function at    */
+/*                     the current time                        */
+/*                   dx -- a double that is the spacing of the */
+/*                     points in u to be used in the dudt      */
+/*                     function                                */
+/*                   u_n -- a pointer to a Vector struct that  */
+/*                     will store the result of the RK4        */
+/*                     integration for the next time step      */
+/*                   dudt -- a function pointer that takes in  */
+/*                     two pointers to Vector structs the      */
+/*                     value of the array at the current time, */
+/*                     where the next step is to be stored and */
+/*                     a double that holds the spacing of the  */
+/*                     points                                  */
+/*                                                             */
+/*            Output: 0 if the RK4 succeeds                    */
+/*                    -1 if the RK4 fails                      */
+/*                                                             */
+/*            Side Effects: Changes the value in u_n to the    */
+/*                     result of the RK4 integration on u with */
+/*                     the given time step.                    */
+/*                     WARNING: RK4 will fail if the time      */
+/*                         step is too large, and if the       */
+/*                         RK4 code detects any NaN values in  */
+/*                         the final summation it will return  */
+/*                         -1. This means the RK4 FAILED and   */
+/*                         the time step needs to be reduced,  */
+/*                         the input function needs to be      */
+/*                         checked, or the points are poorly   */
+/*                         behaved                             */
+/***************************************************************/
 
 int runge_kutta_np( double dt, Vector *u, double dx, 
     Vector *u_n, void dudt (Vector *, Vector *, double))
@@ -172,6 +240,37 @@ int runge_kutta_np( double dt, Vector *u, double dx,
     return 0;
 }
 
+/***************************************************************/
+/*            vector_add_np - Takes two vectors and adds the   */
+/*                     two vectors and stores it in a third    */
+/*                     vector z = a*x+b*y                      */
+/*                     Has NO parallel aspect for testing      */
+/*                                                             */
+/*            Input: x -- a pointer to a Vector struct that    */
+/*                     stores N values in an array of doubles, */
+/*                     and the length N of the vector          */
+/*                   a -- a double that corresponds to the     */
+/*                     scalar multiple that x is to be         */
+/*                     multiplied by                           */
+/*                   y -- a pointer to a Vector struct that    */
+/*                     stores N values in an array of doubles, */
+/*                     and the length N of the vector          */
+/*                   b -- a double that corresponds to the     */
+/*                     scalar multiple that y is to be         */
+/*                     multiplied by                           */
+/*                   z -- a pointer to a Vector struct that    */
+/*                     stores N values in an array of doubles, */
+/*                     and the length N of the vector that     */
+/*                     will store the result of a*x+b*y        */
+/*                                                             */
+/*            Output: NONE                                     */
+/*                                                             */
+/*            Side Effects: If there is a dimension mismatch   */
+/*                     there will be an assertion failure.     */
+/*                     The result of the operation is stored   */
+/*                     in z.                                   */
+/***************************************************************/
+
 void vector_add_np( Vector* x, double a, Vector* y, double b, 
     Vector* z)
 {
@@ -196,7 +295,7 @@ void vector_add_np( Vector* x, double a, Vector* y, double b,
 /*                     Has NO parallel aspect for testing      */
 /*                                                             */
 /*            Input: u -- a pointer to a Vector struct that    */
-/*                     stores the values to be descritized     */
+/*                     stores the values to be discretized     */
 /*                     over                                    */
 /*                   s -- a pointer to a Vector struct that    */
 /*                     will store the result of the finite     */
@@ -207,7 +306,7 @@ void vector_add_np( Vector* x, double a, Vector* y, double b,
 /*            Output: NONE                                     */
 /*                                                             */
 /*            Side Effects: Sets the vector s to the time      */
-/*                     rate of change of the descritized KdV   */
+/*                     rate of change of the discretized  KdV   */
 /*                     equation                                */
 /*                                                             */
 /***************************************************************/

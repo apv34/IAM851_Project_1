@@ -17,7 +17,6 @@
 /*                    - None.                                  */
 /*                                                             */
 /*                Output:                                      */
-/*                Output:                                      */
 /*                    - The result of the the RK4 for 10000    */
 /*                       steps every 10 iterations of RK4 to   */
 /*                       the file many.txt                     */

@@ -13,7 +13,7 @@
 /*                     integration on vector u using time step */
 /*                     dt, spacing dx, and the function handle */
 /*                     dudt the time rate of change of u and   */
-/*                     stoires the result in Vector u_n        */
+/*                     stores the result in Vector u_n         */
 /*                                                             */
 /*            Input: dt -- a double that is the time step of   */
 /*                     the RK4 solver                          */

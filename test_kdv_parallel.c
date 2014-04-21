@@ -1,4 +1,36 @@
-
+/***************************************************************/
+/*                       Anthony Edmonds                       */
+/*                  IAM 851 Project 1 4/22/2014                */
+/*                                                             */
+/*                 KdV Scaling Test Parallel Scaling           */
+/*                                                             */
+/*                                                             */
+/*                Purpose:                                     */
+/*                    To test the scaling of the RK4 method    */
+/*                       for the following values of N: 64,    */
+/*                       128, 256, 512, 1024 and 2048          */
+/*                       This test will initially run on one   */
+/*                       thread and then will run on an        */
+/*                       increasing number of threads to a     */
+/*                       maximum of 8                          */
+/*                                                             */
+/*                Input:                                       */
+/*                    - None.                                  */
+/*                                                             */
+/*                Output:                                      */
+/*                    - The Progress of the solver and the     */
+/*                       resultant time of the simulation      */
+/*                    - The number of points and corresponding */
+/*                       time will be recorded to              */
+/*                       parallel_scaling.txt where N is the   */
+/*                       number of threads the test is run on  */
+/*                       These values are recorded as a        */
+/*                       simulation finishes                   */
+/*                    - The corresponding time is recorded to  */
+/*                       parallel_scaling_format.txt when all  */
+/*                       of the simulations are over to        */
+/*                       produce a formated table.             */
+/***************************************************************/
 #include <stdio.h>
 #include "kdv_equation.h"
 #include "solver.h"

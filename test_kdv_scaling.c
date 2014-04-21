@@ -1,4 +1,24 @@
-
+/***************************************************************/
+/*                       Anthony Edmonds                       */
+/*                  IAM 851 Project 1 4/22/2014                */
+/*                                                             */
+/*                      KdV Scaling Test                       */
+/*                                                             */
+/*                                                             */
+/*                Purpose:                                     */
+/*                    To test the scaling of the RK4 method    */
+/*                       for the following values of N: 64,    */
+/*                       128, 256, 512, 1024 and 2048          */
+/*                       This test will run on the number of   */
+/*                       specified threads                     */
+/*                                                             */
+/*                Input:                                       */
+/*                    - None.                                  */
+/*                                                             */
+/*                Output:                                      */
+/*                    - The Progress of the solver and the     */
+/*                       resultant time of the simulation      */
+/***************************************************************/
 #include <stdio.h>
 #include "kdv_equation.h"
 #include "solver.h"
