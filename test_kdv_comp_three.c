@@ -117,6 +117,6 @@ int main()
     printf( "RK4 with %d Points written every %d steps", N, write);
     printf( " for %d Steps took: %fs\n", steps, end-beg);
     printf( "For a simulation of %fs\n", k*dt);
-    
+    print_timing( steps, dt, write, 0, 8, dx, "comp_wave_three", "txt" );
     return 0;
 }
