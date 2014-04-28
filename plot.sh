@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# != 4 ]; then
+if [ $# != 5 ]; then
   echo "Incorrect number of arguments!"
   exit 1
 fi
@@ -12,7 +12,8 @@ fi
 gnuplot <<- EOF
   reset
   unset key
-  set yrange[-.1:2.2]
+  j = $5+.2
+ set yrange[-.1:j]
   set terminal gif size 1000,800 animate
   set output "$1.gif"
   i = 2

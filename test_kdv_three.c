@@ -28,7 +28,7 @@
 
 /*********************** Definitions ***************************/
     
-#define STEPS 1000
+#define STEPS 800
 
 /***************************************************************/
    
@@ -38,7 +38,7 @@ int main()
     Vector u_n;
     
     int steps = STEPS;
-    int N = 100;
+    int N = 200;
     double dx = 8/((double)N-1);
     double dt = pow(dx, 3);
     double beg, end;

@@ -26,7 +26,7 @@
 #include "kdv_equation.h"
 #include "solver.h"
 
-#define STEPS 1000
+#define STEPS 900
 
 int main()
 {
