@@ -27,13 +27,18 @@
 #include "kdv_equation.h"
 #include "solver.h"
 
-
+/*********************** Definitions ***************************/
+    
+#define STEPS 1000
+    
+/***************************************************************/
+    
 int main()
 {
     Vector u;
     Vector u_n;
     
-    int steps = 10000;
+    int steps = STEPS;
     int N = 4096;
     double dx = 8/((double)N-1);
     double dt = pow(dx, 3);

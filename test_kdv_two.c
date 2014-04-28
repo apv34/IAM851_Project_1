@@ -26,13 +26,14 @@
 #include "kdv_equation.h"
 #include "solver.h"
 
+#define STEPS 1000
 
 int main()
 {
     Vector u;
     Vector u_n;
     
-    int steps = 10000;
+    int steps = STEPS;
     int N = 100;
     double dx = 8/((double)N-1);
     double dt = pow(dx, 3);
@@ -85,6 +86,6 @@ int main()
     printf( "RK4 with %d Points written every %d steps", N, write);
     printf( " for %d Steps took: %fs\n", steps, end-beg);
     printf( "For a simulation of %fs\n", k*dt);
-    
+    print_timing( steps, dt, write, 0, 8, dx, "simple_double", "txt" );
     return 0;
 }

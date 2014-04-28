@@ -27,7 +27,12 @@
 #include "kdv_equation.h"
 #include "solver.h"
 
-
+/*********************** Definitions ***************************/
+    
+#define STEPS 1000
+    
+/*********************** Declarations **************************/
+    
 /***************************************************************/
 /*            initial - Initializes u0 to a compound sech^2    */
 /*                     wave of 2 sech^2(x-2) + 2 sech^2(x-5)   */
@@ -57,7 +62,7 @@ int main()
     Vector u;
     Vector u_n;
     
-    int steps = 10000;
+    int steps = STEPS;
     int N = 128;
     double dx = 8/((double)N-1);
     double dt = pow(dx, 3);

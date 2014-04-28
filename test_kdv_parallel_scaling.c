@@ -30,9 +30,13 @@
 #include "solver.h"
 #include "omp.h"
 
+/*********************** Definitions ***************************/
+    
 #define RUN 6
 #define SIM_TIME 1.0
-
+    
+/*********************** Declarations **************************/
+    
 int runge_kutta_np( double dt, Vector *u, double dx, Vector *u_n,
     void dudt (Vector *, Vector *, double));
 
@@ -43,6 +47,8 @@ void pdu_pdt_np( Vector *u, Vector *s, double dx );
 
 void vector_copy_np( Vector *x, Vector *y );
 
+/***************************************************************/
+    
 int main()
 {
     Vector u;
