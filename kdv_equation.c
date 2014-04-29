@@ -161,6 +161,44 @@ void simple_sec( Vector *u0, double dx, double M,  double loc )
 }
 
 
+/***************************************************************/
+/*            print_timing - Prints the timing and spacing of  */
+/*                     the simulation to the desired file name */
+/*                     and type. A _t is appended for the time */
+/*                     file and _x is appended for the file    */
+/*                     containing the x spacing                */
+/*                                                             */
+/*            Input: numSteps -- a double that contains the    */
+/*                     number of steps the simulation is run   */
+/*                     for                                     */
+/*                   dt -- a double that contains the time     */
+/*                     step used in the simulation             */
+/*                   writeEvery -- an integer that specifies   */
+/*                     how often the simulation writes to a    */
+/*                     file, and determines how the time       */
+/*                     increments are written to the time file */
+/*                   left -- a double that is the left value   */
+/*                     of the wave                             */
+/*                   right -- a double that is the right value */
+/*                     of the wave                             */
+/*                   dx -- a double that contains the spacing  */
+/*                     of the nodes                            */
+/*                   file_name -- a string that contains the   */
+/*                     base file name of the simulation        */
+/*                   extension -- a string that contains the   */
+/*                     desired extension type                  */
+/*                                                             */
+/*            Output: NONE                                     */
+/*                                                             */
+/*            Side Effects: Prints the timing data to the      */
+/*                     specified file name with _t appended to */
+/*                     the name, and prints the spacing data   */
+/*                     to the specified file name with _x      */
+/*                     appended to the name                    */
+/*                                                             */
+/*                  Defined in kdv_equation.c                  */
+/***************************************************************/
+
 void print_timing( double numSteps, double dt, int writeEvery,  
     double left, double right, double dx, char* file_name, 
     char* extension )
@@ -186,7 +224,7 @@ void print_timing( double numSteps, double dt, int writeEvery,
     sprintf( name, "%s_x.%s", file_name, extension );
     output = fopen( name, "w" );
     // x
-    for( i = 0; (left+i*dx) < right; i++ )
+    for( i = 0; (left+i*dx) <= right; i++ )
     {
         fprintf( output, "%f\n", left+i*dx );
     }
